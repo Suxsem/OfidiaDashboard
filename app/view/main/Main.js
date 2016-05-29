@@ -1,29 +1,27 @@
 /**
  * This class is the main view for the application. It is specified in app.js as the
- * "mainView" property. That setting automatically applies the "viewport"
- * plugin causing this view to become the body element (i.e., the viewport).
- *
- * TODO - Replace this content of this view to suite the needs of your application.
+ * "autoCreateViewport" property. That setting automatically applies the "viewport"
+ * plugin to promote that instance of this class to the body element.
  */
 Ext.define('OfidiaDashboard.view.main.Main', {
     extend: 'Ext.tab.Panel',
     xtype: 'app-main',
 
     requires: [
-        'Ext.plugin.Viewport',
-        'Ext.plugin.Viewport',
-        'Ext.window.MessageBox',
-
-        'OfidiaDashboard.view.main.MainController',
-        'OfidiaDashboard.view.main.MainModel',
-        'OfidiaDashboard.view.main.List'
+		'Ext.plugin.Viewport',
+        'OfidiaDashboard.view.*'
     ],
 
     controller: 'main',
-    viewModel: 'main',
-	plugins: 'viewport',
 
+    viewModel: {
+        type: 'main'
+    },
+
+	plugins: 'viewport',
+	
     ui: 'navigation',
+    cls: 'exec-menu-navigation',
 
     tabBarHeaderPosition: 1,
     titleRotation: 0,
@@ -33,13 +31,28 @@ Ext.define('OfidiaDashboard.view.main.Main', {
         layout: {
             align: 'stretchmax'
         },
+        iconCls: 'exec-header-icon',
         title: {
-            bind: {
-                text: '{name}'
-            },
-            flex: 0
+            text: 'Ofidia',
+            textAlign: 'center',
+            flex: 0,
+            minWidth: 160
         },
-        iconCls: 'fa-th-list'
+        tools: [{
+            type: 'gear',
+            plugins: 'responsive',
+            width: 120,
+            margin: '0 0 0 0',
+            handler: 'onSwitchTool',
+            responsiveConfig: {
+                'width < 768 && tall': {
+                    visible: true
+                },
+                'width >= 768': {
+                    visible: false
+                }
+            }
+        }]
     },
 
     tabBar: {
@@ -59,48 +72,65 @@ Ext.define('OfidiaDashboard.view.main.Main', {
         }
     },
 
+    listeners: {
+        tabchange: 'onTabChange'
+    },
+
     defaults: {
-        bodyPadding: 20,
         tabConfig: {
             plugins: 'responsive',
             responsiveConfig: {
                 wide: {
                     iconAlign: 'left',
-                    textAlign: 'left'
+                    textAlign: 'left',
+                    flex: 0
                 },
                 tall: {
                     iconAlign: 'top',
                     textAlign: 'center',
-                    width: 120
+                    flex: 1
+                },
+                'width < 768 && tall': {
+                    visible: false
+                },
+                'width >= 768': {
+                    visible: true
                 }
             }
         }
     },
 
     items: [{
-        title: 'Home',
-        iconCls: 'fa-home',
-        // The following grid shares a store with the classic version's grid as well!
+        // This page has a hidden tab so we can only get here during initialization. This
+        // allows us to avoid rendering an initial activeTab only to change it immediately
+        // by routing
+        xtype: 'component',
+        tabConfig: {
+            hidden: true
+        }
+    },{
+        xtype: 'kpi',
+        title: 'KPI Overview',
+        iconCls: 'exec-kpi-icon'
+    },{
+        xtype: 'logout',
+        title: 'LOGOUT',
+    }],
+
+    // This object is a config for the popup menu we present on very small form factors.
+    // It is used by our controller (MainController).
+    assistiveMenu: {
         items: [{
-            xtype: 'mainlist'
-        }]
-    }, {
-        title: 'Users',
-        iconCls: 'fa-user',
-        bind: {
-            html: '{loremIpsum}'
+            text: 'KPI Overview',
+            height: 50,
+            iconCls: 'exec-kpi-icon'
+        },{
+            text: 'LOGOUT',
+            height: 50,
+            iconCls: 'exec-kpi-icon'
+        }],
+        listeners: {
+            click: 'onMenuClick'
         }
-    }, {
-        title: 'Groups',
-        iconCls: 'fa-users',
-        bind: {
-            html: '{loremIpsum}'
-        }
-    }, {
-        title: 'Settings',
-        iconCls: 'fa-cog',
-        bind: {
-            html: '{loremIpsum}'
-        }
-    }]
+    }
 });

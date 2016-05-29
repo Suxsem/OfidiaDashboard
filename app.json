@@ -52,7 +52,7 @@
      * The name of the theme for this application.
      */
     
-    "theme": "theme-triton",
+    "theme": "theme-crisp-touch",
     
     
     /**
@@ -65,20 +65,8 @@
      *      ]
      */
     "requires": [
-        "font-awesome"
+		"charts"
     ],
-
-    /**
-     * Fashion build configuration properties.
-     */
-    "fashion": {
-        "inliner": {
-            /**
-             * Disable resource inliner. Production builds enable this by default.
-             */
-            "enable": false
-        }
-    },
 
     /**
      * Sass configuration properties.
@@ -93,6 +81,7 @@
          * "OfidiaDashboard.view.Foo" to "sass/src/OfidiaDashboard/view/Foo.scss".
          */
         "namespace": "OfidiaDashboard",
+		"fashion": true,
 
         /**
          * File used to save sass variables edited via Sencha Inspector. This file
@@ -257,8 +246,7 @@
             // value of the generated output css file for the app,
             // defined in .sencha/app/defaults.properties
             "path": "${build.out.css.path}",
-            "bundle": true,
-            "exclude": ["fashion"]
+            "bundle": true
         }
     ],
 
@@ -467,7 +455,9 @@
      * valid regular expression.
      */
     "ignore": [
-        "(^|/)CVS(/?$|/.*?$)"
+        "(^|/)CVS(/?$|/.*?$)",
+        "^\\.svn$",
+        "^\\.git$"
     ],
 
     /**

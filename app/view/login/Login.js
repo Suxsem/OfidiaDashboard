@@ -16,6 +16,7 @@ Ext.define('OfidiaDashboard.view.login.Login', {
     items: {
         xtype: 'form',
         reference: 'form',
+		bodyPadding: 10,
         items: [{
             xtype: 'textfield',
             name: 'username',
