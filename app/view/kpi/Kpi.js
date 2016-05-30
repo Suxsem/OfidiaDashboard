@@ -9,6 +9,7 @@ Ext.define('OfidiaDashboard.view.kpi.Kpi', {
     cls: 'kpi-main',
 
     requires: [
+	    'Ext.ux.GMapPanel',
         'Ext.chart.axis.Numeric',
         'Ext.chart.axis.Category',
         'Ext.chart.series.Area',
@@ -70,6 +71,31 @@ Ext.define('OfidiaDashboard.view.kpi.Kpi', {
         }]
 
     },{
+		xtype: 'gmappanel',
+		cls: 'kpi-main-map',
+        gmapType: 'map',
+		minHeight: 500,
+		
+		tbar: {
+            cls: 'kpi-toolbar',
+
+            items: [{
+                xtype: 'container',
+                cls: 'kpi-chart-title',
+                html: 'SITUAZIONE SENSORI IN TEMPO REALE'
+            }]
+        },
+		
+        center: {
+            geoCodeAddr: "221B Baker Street",
+            marker: {
+                title: 'Holmes Home'
+            }
+        },
+        mapOptions : {
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+	},{
         reference: 'mainChart',
         xtype: 'chart',
         flex: 1,

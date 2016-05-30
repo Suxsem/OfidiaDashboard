@@ -110,24 +110,31 @@ Ext.define('OfidiaDashboard.view.main.Main', {
         }
     },{
         xtype: 'kpi',
-        title: 'KPI Overview',
+        title: 'Dashboard',
         iconCls: 'exec-kpi-icon'
     },{
+        xtype: 'component',
+        title: 'Info',
+        iconCls: 'exec-news-icon'
+    },{
         xtype: 'logout',
-        title: 'LOGOUT',
+        title: 'LOGOUT'
     }],
 
     // This object is a config for the popup menu we present on very small form factors.
     // It is used by our controller (MainController).
     assistiveMenu: {
         items: [{
-            text: 'KPI Overview',
+            text: 'Dashboard',
             height: 50,
             iconCls: 'exec-kpi-icon'
         },{
-            text: 'LOGOUT',
+            text: 'Info',
             height: 50,
-            iconCls: 'exec-kpi-icon'
+            iconCls: 'exec-news-icon'
+        },{
+            text: 'LOGOUT',
+            height: 50
         }],
         listeners: {
             click: 'onMenuClick'
