@@ -3,8 +3,8 @@ Ext.define('OfidiaDashboard.view.kpi.KpiModel', {
     alias: 'viewmodel.kpi',
 
     requires: [
-        'OfidiaDashboard.model.Kpi',
-        'OfidiaDashboard.store.Kpi'
+        'OfidiaDashboard.model.Average',
+        'OfidiaDashboard.store.Average'
     ],
 
     data: {
@@ -13,13 +13,9 @@ Ext.define('OfidiaDashboard.view.kpi.KpiModel', {
     },
 
     stores: {
-        kpiMain: {
-            type: 'kpi',
-            autoLoad: true,
-            filters: {
-                property: 'category',
-                value: '{kpiCategory}'
-            }
+        averageVM: {
+            type: 'average',
+            autoLoad: true
         }
     }
 });

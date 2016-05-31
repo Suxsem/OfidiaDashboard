@@ -22,7 +22,7 @@ Ext.define('OfidiaDashboard.view.kpi.Kpi', {
 
 	config: {
 		activeState: null,
-		defaultActiveState: 'clicks'
+		defaultActiveState: 'ta'
 	},
 
 	controller: 'kpi',
@@ -135,7 +135,7 @@ Ext.define('OfidiaDashboard.view.kpi.Kpi', {
 
 			}]
 		}, {
-			reference: 'mainChart',
+			reference: 'averageChart',
 			xtype: 'chart',
 			flex: 1,
 			interactions: [{
@@ -148,14 +148,14 @@ Ext.define('OfidiaDashboard.view.kpi.Kpi', {
 				}
 			}],
 			cls: 'kpi-main-chart',
-			bind: '{kpiMain}',
+			bind: '{averageVM}',
 			animation: false,
 
 			tbar: {
 				cls: 'kpi-toolbar',
 
 				defaults: {
-					toggleHandler: 'onToggleKpi'
+					toggleHandler: 'onToggleAverage'
 				},
 
 				items: [{
@@ -165,37 +165,33 @@ Ext.define('OfidiaDashboard.view.kpi.Kpi', {
 					},
 					'->', {
 						ui: 'kpi',
-						text: 'CLICKS',
-						filter: 'clicks',
-						toggleGroup: 'kpi',
-						reference: 'clicks',
+						text: 'TA',
+						toggleGroup: 'average',
+						reference: 'ta',
 						allowDepress: false,
 						dataIndex: 0
 					}, {
 						ui: 'kpi',
-						text: 'WON',
-						filter: 'redemption',
-						reference: 'redemption',
-						toggleGroup: 'kpi',
+						text: 'UR',
+						reference: 'ur',
+						toggleGroup: 'average',
 						allowDepress: false,
 						dataIndex: 1
 					}, {
 						ui: 'kpi',
-						text: 'SALES',
-						filter: 'sales',
-						reference: 'sales',
-						toggleGroup: 'kpi',
+						text: 'O3',
+						reference: 'o3',
+						toggleGroup: 'average',
 						allowDepress: false,
 						dataIndex: 2
 					}, {
 						ui: 'kpi',
-						text: 'GOALS MET',
-						filter: 'goalsmet',
-						reference: 'goalsmet',
+						text: 'CO2',
+						reference: 'co2',
 						margin: 0,
-						toggleGroup: 'kpi',
+						toggleGroup: 'average',
 						allowDepress: false,
-						dataIndex: 1
+						dataIndex: 3
 					}
 				]
 			},
@@ -203,34 +199,34 @@ Ext.define('OfidiaDashboard.view.kpi.Kpi', {
 			axes: [{
 				type: 'numeric',
 				position: 'left',
-				fields: ['data1'],
+				fields: ['ta'],
 				fontSize: 12,
 				grid: true,
 				minimum: 0
 			}, {
 				type: 'category',
 				position: 'bottom',
-				fields: ['name']
+				fields: ['date']
 			}],
 
 			series: [{
 				type: 'area',
 				subStyle: {
-					stroke: ['rgb(34,198,239)', 'rgb(241,73,91)'],
-					fill: ['rgba(34,198,239,0.25)', 'rgba(241,73,91,0.25)'],
+					stroke: 'rgb(34,198,239)',
+					fill: 'rgba(34,198,239,0.25)',
 					'stroke-width': 3
 				},
-				xField: 'name',
-				yField: ['data1', 'data2']
+				xField: 'date',
+				yField: 'ta'
 			}]
 		}]
 	}],
 
 	validStates: {
-		clicks: 1,
-		redemption: 1,
-		sales: 1,
-		goalsmet: 1
+		ta: 1,
+		ur: 1,
+		o3: 1,
+		co2: 1
 	},
 
 	isValidState: function(state) {

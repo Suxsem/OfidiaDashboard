@@ -9,7 +9,7 @@ Ext.define('OfidiaDashboard.Application', {
     name: 'OfidiaDashboard',
 	
     // The tab we want to activate if there is no "#tag" in the URL.
-    defaultToken: '!kpi/clicks',
+    defaultToken: '!kpi/ta',
 
     stores: [
         // TODO: add global / shared stores here
