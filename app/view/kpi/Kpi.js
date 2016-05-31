@@ -7,9 +7,10 @@ Ext.define('OfidiaDashboard.view.kpi.Kpi', {
 	itemId: 'kpi', // for setActiveTab(id)
 
 	cls: 'kpi-main',
-
+	
 	requires: [
 		'Ext.ux.GMapPanel',
+		'OfidiaDashboard.store.Statistics',
 		'Ext.chart.axis.Numeric',
 		'Ext.chart.axis.Category',
 		'Ext.chart.series.Area',
@@ -107,7 +108,12 @@ Ext.define('OfidiaDashboard.view.kpi.Kpi', {
 		},
 
 		items: [{
-			xtype: 'component',
+			
+			layout: {
+				type: 'hbox',
+				align: 'stretch'
+			},
+
 			width: 280,
 			cls: 'kpi-donut-chart',
 
@@ -122,8 +128,30 @@ Ext.define('OfidiaDashboard.view.kpi.Kpi', {
 			},
 			
 			items: [{
-				xtype: 'component',
-				flex: 1
+				xtype: 'polar',
+				flex: 1,
+				store: {
+					type: 'statistics'
+				},
+				series: {
+					type: 'pie',
+					angleField: 'data1',
+					label: {
+						field: 'os',
+						calloutLine: {
+							length: 60,
+							width: 3
+							// specifying 'color' is also possible here
+						}
+					},
+					highlight: true,
+					tooltip: {
+						trackMouse: true,
+						renderer: 'onSeriesTooltipRender'
+					},
+					donut: 30
+				}
+
 			}]
 		}, {
 			reference: 'mainChart',
