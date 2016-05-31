@@ -109,7 +109,6 @@ $ended: #F1485B;
     }
 
     .kpi-main-chart {
-        margin-left: 20px;
         margin-right: 20px;
         margin-bottom: 10px;
 
@@ -125,12 +124,29 @@ $ended: #F1485B;
             z-index: 1000;
         }
     }
-
-    .kpi-meta-charts {
-        margin-bottom: 20px;
+	
+    .kpi-donut-chart {
+        margin-left: 20px;
         margin-right: 20px;
         margin-bottom: 10px;
 
+        overflow: visible;
+
+        .x-panel-body {
+            border-radius: 3px;
+			
+			background-color: $exec-tile-background;
+
+            -webkit-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.25);
+            -moz-box-shadow:    0px 1px 1px 0px rgba(0, 0, 0, 0.25);
+            box-shadow:         0px 1px 1px 0px rgba(0, 0, 0, 0.25);
+
+            z-index: 1000;
+        }
+    }
+
+    .kpi-meta-charts {
+        margin-bottom: 20px;
         overflow: visible;
 
         .x-panel-body, .x-panel, .x-box-inner {
@@ -189,33 +205,6 @@ $ended: #F1485B;
             }
         }
 
-        .redemption-body, .statistics-body {
-            border-radius: 3px;
-
-            -webkit-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.25);
-            -moz-box-shadow:    0px 1px 1px 0px rgba(0, 0, 0, 0.25);
-            box-shadow:         0px 1px 1px 0px rgba(0, 0, 0, 0.25);
-
-            background-color: $exec-tile-background;
-        }
-
-        .redemption-body {
-            margin-right: 10px;
-        }
-
-        .statistics-body {
-            margin-right: 20px;
-            padding: 15px;
-        }
-
-        .statistic-header {
-            font-size: $exec-font-size-content;
-            font-weight: $exec-font-semibold;
-            text-transform: uppercase;
-            color: $exec-font-light-color;
-            margin-bottom: 10px;
-        }
-
         .sparkline {
             height: 7px;
             margin-left: 85px;
@@ -238,37 +227,6 @@ $ended: #F1485B;
                 background-color: $ended;
             }
         }
-        .statistic-tag {
-            width: 70px;
-            padding: 5px 0 5px 0;
-            font-size: $exec-font-size-small-content;
-            font-weight: $exec-font-semibold;
-            color: white;
-            border-radius: 3px;
-            text-transform: uppercase;
-            text-align: center;
-            float: left;
-            &.active {
-                background-color: $active;
-            }
-            &.paused {
-                background-color: $paused;
-            }
-            &.ended {
-                background-color: $ended;
-            }
-        }
-        .statistic-description {
-            line-height: 27px;
-            font-size: $exec-font-size-small-content;
-            font-weight: $exec-font-bold;
-            float:left;
-            margin-left: 15px;
-            color: $exec-font-light-color;
-            text-transform: uppercase;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
+
     }
 }

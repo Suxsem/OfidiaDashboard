@@ -107,103 +107,23 @@ Ext.define('OfidiaDashboard.view.kpi.Kpi', {
 		},
 
 		items: [{
-			title: 'REDEMPTION',
-
-			margin: '0 10px 0 20px',
+			xtype: 'component',
 			width: 280,
-			bodyCls: 'redemption-body',
+			cls: 'kpi-donut-chart',
 
-			layout: {
-				type: 'vbox',
-				align: 'stretch'
-			},
+			tbar: {
+				cls: 'kpi-toolbar',
 
-			items: [{
-				xtype: 'container',
-				layout: {
-					type: 'hbox',
-					align: 'stretch'
-				},
-				flex: 1,
 				items: [{
-					xtype: 'polar',
-					flex: 1,
-					animation: true,
-					padding: '10px 0 10px 10px',
-					donut: true,
-					interactions: ['rotate'],
-					colors: ['#2ac8ef', '#ececec'],
-
-					store: {
-						fields: ['name', 'data1'],
-						data: [{
-							name: 'metric one',
-							data1: 25
-						}, {
-							name: 'metric two',
-							data1: 75
-						}]
-					},
-
-					sprites: [{
-						type: 'text',
-						x: 40,
-						y: 71,
-						text: '25%',
-						font: '30px 300 Proxima Nova, Helvetica Neue, Helvetica, Arial, sans-serif',
-						fillStyle: '#69708a'
-					}],
-
-					series: [{
-						type: 'pie',
-						xField: 'data1',
-						colors: ['#2ac8ef', '#ececec'],
-						donut: 85
-					}]
-				}, {
-					xtype: 'polar',
-					flex: 1,
-					padding: '10px 10px 10px 0',
-					animation: true,
-					donut: true,
-					interactions: ['rotate'],
-					colors: ['#11c897', '#ececec'],
-
-					store: {
-						fields: ['name', 'data1'],
-						data: [{
-							name: 'metric one',
-							data1: 50
-						}, {
-							name: 'metric two',
-							data1: 50
-						}]
-					},
-
-					sprites: [{
-						type: 'text',
-						x: 40,
-						y: 71,
-						text: '50%',
-						font: '30px 300 Proxima Nova, Helvetica Neue, Helvetica, Arial, sans-serif',
-						fillStyle: '#69708a'
-					}],
-
-					series: [{
-						type: 'pie',
-						xField: 'data1',
-						colors: ['#11c897', '#ececec'],
-						donut: 85
-					}]
+					xtype: 'container',
+					cls: 'kpi-chart-title',
+					html: 'STATISTICHE'
 				}]
-			}, {
-				xtype: 'label',
-				html: '<span>IN STORE</span><span>1,024</span>',
-				cls: 'kpi-in-store'
-			}, {
-				xtype: 'label',
-				html: '<span>ONLINE</span><span>20,678</span>',
-				cls: 'kpi-online'
+			},
+			
+			items: [{
+				xtype: 'component',
+				flex: 1
 			}]
 		}, {
 			reference: 'mainChart',
@@ -222,8 +142,6 @@ Ext.define('OfidiaDashboard.view.kpi.Kpi', {
 			bind: '{kpiMain}',
 			animation: false,
 
-			insetPadding: '40px 40px 20px 30px',
-
 			tbar: {
 				cls: 'kpi-toolbar',
 
@@ -234,7 +152,7 @@ Ext.define('OfidiaDashboard.view.kpi.Kpi', {
 				items: [{
 						xtype: 'container',
 						cls: 'kpi-chart-title',
-						html: 'CAMPAIGN PERFORMANCE'
+						html: 'MEDIE MENSILI'
 					},
 					'->', {
 						ui: 'kpi',
