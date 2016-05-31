@@ -11,6 +11,7 @@ Ext.define('OfidiaDashboard.view.kpi.Kpi', {
 	requires: [
 		'Ext.ux.GMapPanel',
 		'OfidiaDashboard.store.Statistics',
+		'OfidiaDashboard.store.Indicator',
 		'Ext.chart.axis.Numeric',
 		'Ext.chart.axis.Category',
 		'Ext.chart.series.Area',
@@ -40,36 +41,25 @@ Ext.define('OfidiaDashboard.view.kpi.Kpi', {
 	minWidth: 600,
 
 	items: [{
-		xtype: 'component',
+		xtype: 'dataview',
 		cls: 'kpi-tiles',
 		height: 100,
+		itemSelector: 'div.indicator',
 
 		tpl: [
 			'<div class="kpi-meta">',
 			'<tpl for=".">',
 			'<span>',
-			'<div>{statistic}</div> {description}',
+			'<div class="indicator">{value}</div> {description}',
 			'</span>',
 			'</tpl>',
 			'</div>'
 		],
-
-		data: [{
-			description: 'Campaigns',
-			statistic: 10
-		}, {
-			description: 'Opportunities',
-			statistic: '20,560'
-		}, {
-			description: 'Closed Won',
-			statistic: '10,000'
-		}, {
-			description: 'Total Sales',
-			statistic: '$90,200'
-		}, {
-			description: 'Goals Met',
-			statistic: '71%'
-		}]
+		
+		store: {
+			type: 'indicator',
+			autoLoad: true
+		}
 
 	}, {
 		xtype: 'gmappanel',
@@ -137,18 +127,9 @@ Ext.define('OfidiaDashboard.view.kpi.Kpi', {
 					type: 'pie',
 					angleField: 'data1',
 					label: {
-						field: 'os',
-						calloutLine: {
-							length: 60,
-							width: 3
-							// specifying 'color' is also possible here
-						}
+						field: 'os'
 					},
 					highlight: true,
-					tooltip: {
-						trackMouse: true,
-						renderer: 'onSeriesTooltipRender'
-					},
 					donut: 30
 				}
 
